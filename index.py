@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import os
 # Definir una lista de insumos informáticos con sus nombres y precios unitarios
 insumos_informaticos = {
     "Laptopp": 800,
