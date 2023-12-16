@@ -1,6 +1,6 @@
 # Definir una lista de insumos informáticos con sus nombres y precios unitarios
 insumos_informaticos = {
-    "Laptop": 800,
+    "Laptopp": 800,
     "Monitor": 200,
     "Teclado": 30,
     "Ratón": 20,
