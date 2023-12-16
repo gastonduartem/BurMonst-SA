@@ -1,22 +1,29 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-# Definir una lista de insumos informáticos con sus nombres y precios unitarios
-insumos_informaticos = {
-    "Laptopp": 800,
-    "Monitor": 200,
-    "Teclado": 30,
-    "Ratón": 20,
-    "Impresora": 150,
-}
+# Clase Producto que representa un producto en el catálogo
+class Producto:
+    def __init__(self, product_id, name, price):
+        self.product_id = product_id
+        self.name = name
+        self.price = price
+        self.sales = np.random.randint(50, 300)  # Generar ventas aleatorias al inicio
 
-# Crear un diccionario para almacenar los datos de los clientes
-clientes = {
-    "80108991-3": "BurMont S.A",
-}
+    def aumentar_ventas(self, cantidad):
+        self.sales += cantidad
 
-# Inicializar el contador de tickets
-contador_tickets = 1
+# Clase CarroDeCompras para gestionar los productos en el carrito
+class CarroDeCompras:
+    def __init__(self):
+        # Catálogo de productos predefinidos
+        self.catalogo = {
+            1: Producto(1, "Laptop", 800),
+            2: Producto(2, "Monitor", 200),
+            3: Producto(3, "Teclado", 30),
+            4: Producto(4, "Ratón", 20),
+            5: Producto(5, "Impresora", 150)
+        }
+        self.cart_items = {}  # Productos agregados al carrito
 
 # Función para calcular el presupuesto
 def calcular_presupuesto(insumos, cantidades):
