@@ -111,6 +111,47 @@ def main():
         nuevo_cliente = input("Ingrese su nombre para registrarse como nuevo cliente: ")
         datos_clientes[ruc_cliente] = nuevo_cliente
         print("Registro completado.")
+        
+    carrito = CarroDeCompras()  # Crear un nuevo carrito
+
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')  # Limpiar la pantalla
+
+        # Mostrar productos disponibles
+        print("\nBurMont S.A")
+        print("\nInsumos Informáticos")
+        print("\nProductos disponibles:")
+        for product_id, producto in carrito.catalogo.items():
+            print(f"{product_id}. {producto.name} - ${producto.price}")
+
+        if carrito.cart_items:
+            print(f"Tienes {sum(carrito.cart_items.values())} en el carrito")
+
+        # Opciones para agregar, ver o eliminar productos, o finalizar la compra
+        opcion = input("Selecciona un producto (1-5) para agregar al carrito, 6 para ver el carrito, 7 para eliminar un producto del carrito, o 8 para finalizar la compra y ver el gráfico de productos más vendidos: ")
+
+        if opcion in ["1", "2", "3", "4", "5"]:
+            cantidad = int(input(f"Ingrese la cantidad del producto seleccionado ({opcion}): "))
+            try:
+                carrito.agregar_item(int(opcion), cantidad)
+            except ProductoNoEncontrado as e:
+                print(e)
+        elif opcion == "6":
+            os.system('cls' if os.name == 'nt' else 'clear')
+            carrito.mostrar_carrito()
+            input("Presiona Enter para continuar...")
+        elif opcion == "7":
+            os.system('cls' if os.name == 'nt' else 'clear')
+            carrito.mostrar_carrito()
+            producto_a_eliminar = input("Escribe el nombre del producto que deseas eliminar del carrito: ")
+            carrito.eliminar_item(producto_a_eliminar)
+            input("Presiona Enter para continuar.")
+        elif opcion == "8":
+            os.system('cls' if os.name == 'nt' else 'clear')
+            carrito.realizar_compra(ruc_cliente, nombre_cliente)
+            break
+        else:
+            print("Opción inválida. Selecciona un número del 1 al 8.")
 # Ejecutar la función principal al iniciar el programa
 if __name__ == "__main__":
     main()
