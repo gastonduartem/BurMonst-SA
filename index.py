@@ -59,7 +59,17 @@ class CarroDeCompras:
     # Clase de excepción para producto no encontrado
     class ProductoNoEncontrado(Exception):
      pass
-
+# Realizar la compra y mostrar detalles
+    def realizar_compra(self, ruc_cliente, nombre_cliente):
+        # Detalles de la compra
+        total_cost = 0
+        print("Detalles de la compra:")
+        for product_id, quantity in self.cart_items.items():
+            producto = self.catalogo[product_id]
+            costo_total_producto = producto.price * quantity
+            total_cost += costo_total_producto
+            print(f"Producto: {producto.name} - Cantidad: {quantity} - Costo total: ${costo_total_producto}")
+            
 # Función para calcular el presupuesto
 def calcular_presupuesto(insumos, cantidades):
     presupuesto_total = 0
