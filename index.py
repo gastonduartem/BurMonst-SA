@@ -25,6 +25,16 @@ class CarroDeCompras:
         }
         self.cart_items = {}  # Productos agregados al carrito
 
+    # Mostrar los productos en el carrito
+    def mostrar_carrito(self):
+        if not self.cart_items:
+            print("El carrito está vacío.")
+        else:
+            print("Contenido del carrito:")
+            for product_id, quantity in self.cart_items.items():
+                producto = self.catalogo[product_id]
+                print(f"Producto: {producto.name} - Cantidad: {quantity}")
+
 # Función para calcular el presupuesto
 def calcular_presupuesto(insumos, cantidades):
     presupuesto_total = 0
