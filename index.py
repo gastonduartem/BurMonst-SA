@@ -94,73 +94,24 @@ class CarroDeCompras:
             plt.text(ventas[i] + 5, i, f'{porcentaje:.1f}%', va='center')
 
         plt.show()
-# Función principal
+# Función principal para ejecutar el programa
 def main():
-    while True:
-        global contador_tickets  # Acceder a la variable global contador_tickets
-        print("Bienvenido al sistema de presupuestos de insumos informáticos.")
-        ruc_cliente = input("Ingrese el RUC del cliente: ")
-
-        if verificar_cliente(ruc_cliente):
-            nombre_cliente = input("Cliente nuevo. Ingrese el nombre del cliente: ")
-            nuevo_ruc = input("Ingrese el número de RUC del cliente: ")
-            clientes[nuevo_ruc] = nombre_cliente
-        else:
-            nombre_cliente = clientes[ruc_cliente]
-            print(f"Cliente existente: {nombre_cliente} - RUC: {ruc_cliente}")
-
-        cantidades = {}
-        while True:
-            insumo = input("Ingrese el nombre del insumo (o 'salir' para terminar): ").capitalize()
-            if insumo == 'Salir':
-                break
-            if insumo in insumos_informaticos:
-                cantidad = int(input(f"Ingrese la cantidad de {insumo}: "))
-                cantidades[insumo] = cantidad
-            else:
-                print("Insumo no válido. Por favor, elija otro insumo.")
-
-        presupuesto = calcular_presupuesto(insumos_informaticos, cantidades)
-        print(f"Presupuesto total: ${presupuesto}")
-
-        print(f"Cliente: {nombre_cliente} - RUC: {ruc_cliente}")
-        print("Compra:")
-        for insumo, cantidad in cantidades.items():
-            print(f"{insumo}: {cantidad} unidades")
-
-        # Generar e imprimir el número de ticket
-        numero_ticket = f"{contador_tickets:03d}"
-        print(f"Número de Ticket: {numero_ticket}")
-
-        entrega = None
-
-        while entrega not in ["entrega", "local"]:
-            entrega = input("¿Desea entrega a domicilio (costo adicional de 10 Dolares) o retirar en el local? (Entrega/Local): ").strip().lower()
-
-        if entrega == 'entrega':
-            ubicacion = input("Ingrese su ubicación: ")
-            numero_casa = input("Ingrese su número de casa: ")
-            costo_entrega = 10
-            presupuesto_total = presupuesto + costo_entrega
-            print(f"Costo de entrega: ${costo_entrega}")
-            print(f"La entrega se realizará en la ubicación: {ubicacion}.")
-            print(f"Presupuesto total con entrega: ${presupuesto_total}")
-            confirmacion = input("¿Desea confirmar la compra? (Sí/No): ").strip().lower()
-            if confirmacion == 'si':
-                print("La compra se ha realizado con éxito. Puede realizar el pago a través de los métodos de pago disponibles en nuestro sitio web presentando el ticket.")
-                contador_tickets += 1  # Incrementar el contador de tickets
-            else:
-                print("La compra ha sido cancelada. Gracias por visitarnos. ¡Vuelva pronto!")
-        elif entrega == 'local':
-            print("Gracias por su compra. Lo esperamos en nuestro local. La ubicación está detallada en la página web.")
-        else:
-            print("Opción no válida. La compra se registrará para retiro en el local.")
-
-        solicitar_otro_presupuesto = input("¿Desea solicitar otro presupuesto? (Sí/No): ").strip().lower()
-        if solicitar_otro_presupuesto != 'si':
-            print("Gracias por utilizar nuestro sistema de presupuestos.")
-            break
-
+    # Datos predefinidos de clientes
+    datos_clientes = {
+        "123456": "Jorge Perez",
+        "12345": "Claudia Portillo"
+    }
+    #Implementacion de registro de usuario
+    ruc_cliente = input("Ingrese su RUC: ")
+    nombre_cliente = datos_clientes.get(ruc_cliente)
+    if nombre_cliente:
+        print(f"Bienvenido, {nombre_cliente}!")
+    else:
+        print("Cliente no registrado.")
+        nuevo_cliente = input("Ingrese su nombre para registrarse como nuevo cliente: ")
+        datos_clientes[ruc_cliente] = nuevo_cliente
+        print("Registro completado.")
+# Ejecutar la función principal al iniciar el programa
 if __name__ == "__main__":
     main()
 
