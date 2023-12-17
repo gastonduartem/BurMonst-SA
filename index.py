@@ -70,23 +70,11 @@ class CarroDeCompras:
             total_cost += costo_total_producto
             print(f"Producto: {producto.name} - Cantidad: {quantity} - Costo total: ${costo_total_producto}")
             
-# Función para calcular el presupuesto
-def calcular_presupuesto(insumos, cantidades):
-    presupuesto_total = 0
-    for insumo, cantidad in cantidades.items():
-        if insumo in insumos:
-            precio_unitario = insumos[insumo]
-            costo_total = precio_unitario * cantidad
-            presupuesto_total += costo_total
-            print(f"{insumo}: {cantidad} x ${precio_unitario} = ${costo_total}")
-    return presupuesto_total
-
-# Función para verificar si el cliente es nuevo
-def verificar_cliente(ruc_cliente):
-    if ruc_cliente in clientes:
-        return False
-    else:
-        return True
+ # Mostrar detalles del cliente y costo total
+        print(f"Costo total de la compra: ${total_cost}")
+        print(f"RUC del cliente: {ruc_cliente}")
+        print(f"Nombre del cliente: {nombre_cliente}")
+        print("¡Gracias por tu compra!")
 
 # Función principal
 def main():
