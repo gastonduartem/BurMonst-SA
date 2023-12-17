@@ -75,7 +75,25 @@ class CarroDeCompras:
         print(f"RUC del cliente: {ruc_cliente}")
         print(f"Nombre del cliente: {nombre_cliente}")
         print("¡Gracias por tu compra!")
+        
+# Gráfico de productos más vendidos
+        productos = [producto.name for producto in self.catalogo.values()]
+        ventas = [producto.sales for producto in self.catalogo.values()]
+        total_sales = sum(ventas)
+        porcentajes = [100 * venta / total_sales for venta in ventas]
 
+        plt.figure(figsize=(8, 6))
+        plt.barh(productos, ventas, color='lightblue')
+        plt.xlabel('Cantidad vendida')
+        plt.ylabel('Productos')
+        plt.title('Productos más vendidos de la semana')
+        plt.tight_layout()
+
+        # Mostrar porcentajes en el gráfico
+        for i, porcentaje in enumerate(porcentajes):
+            plt.text(ventas[i] + 5, i, f'{porcentaje:.1f}%', va='center')
+
+        plt.show()
 # Función principal
 def main():
     while True:
