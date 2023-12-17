@@ -35,6 +35,31 @@ class CarroDeCompras:
                 producto = self.catalogo[product_id]
                 print(f"Producto: {producto.name} - Cantidad: {quantity}")
 
+    # Agregar un producto al carrito
+    def agregar_item(self, product_id, quantity):
+        try:
+            producto = self.catalogo[product_id]
+            producto_existente = self.cart_items.get(product_id, 0)
+            self.cart_items[product_id] = producto_existente + quantity
+            ventas_simuladas = np.random.randint(0, 10, size=quantity)
+            producto.aumentar_ventas(sum(ventas_simuladas))
+        except KeyError:
+            raise ProductoNoEncontrado("Producto no encontrado en el catálogo.")
+        
+          # Eliminar un producto del carrito
+    def eliminar_item(self, producto_a_eliminar):
+        eliminado = False
+        for product_id, producto in self.catalogo.items():
+            if producto.name.lower() == producto_a_eliminar.lower() and product_id in self.cart_items:
+                del self.cart_items[product_id]
+                eliminado = True
+                print("Producto eliminado del carrito.")
+                break
+
+    # Clase de excepción para producto no encontrado
+    class ProductoNoEncontrado(Exception):
+     pass
+
 # Función para calcular el presupuesto
 def calcular_presupuesto(insumos, cantidades):
     presupuesto_total = 0
